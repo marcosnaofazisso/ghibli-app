@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar, View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { StatusBar, View, Text, TextInput, StyleSheet, Button, Image } from "react-native";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,6 +31,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image style={styles.tiny} source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} />
         <StatusBar
           animated={true}
           backgroundColor={this.state.color ? 'green' : 'blue'} />
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#ECF0F1'
   },
   churros: {
@@ -60,8 +62,12 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     fontSize: 50,
     height: 100,
+    width: 500,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center'
+  }, tiny: {
+    width: 50,
+    height: 50
   }
 });
