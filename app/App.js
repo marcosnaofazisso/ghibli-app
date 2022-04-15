@@ -2,7 +2,10 @@ import React, { useState, Component } from "react";
 import { View, Text, StyleSheet, Button, Image, FlatList } from "react-native";
 
 import api from "./services/api";
-import Filmes from "./src";
+
+
+import Filmes from "./src/Filmes/index";
+import Locacoes from "./src/Locations";
 import logo from "./assets/logo.png"
 
 export default class App extends React.Component {
@@ -16,20 +19,28 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     const response = await api.get('/films')
+    const localResp = await api.get('/locations')
     this.setState({
-      filmes: response.data
+      filmes: response.data,
+      locations: localResp.data
     })
   }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.mainTitle}>Ghibli App</Text>
-        <Image style={{ width: 200, height: 100, marginBottom: 30}} source={require('./assets/logo.png')} />
+        <Image style={{ width: 200, height: 100, marginBottom: 30 }} source={require('./assets/logo.png')} />
         <FlatList
           data={this.state.filmes}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item, index }) => <Filmes data={item} index={index} />}
         />
+        {/* <Text style={styles.mainTitle}>Locations</Text>
+        <FlatList
+          data={this.state.locations}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item, index }) => <Locacoes data={item} index={index} />}
+        /> */}
       </View>
     )
 

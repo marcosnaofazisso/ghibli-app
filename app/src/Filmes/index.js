@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Button, Alert } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable, Alert } from "react-native";
 
 export default class Filmes extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ export default class Filmes extends React.Component {
     }
 
     verDetalhes = _ => {
-        Alert.alert("Voce escolheu o filme", this.props.data.title)
+        Alert.alert(this.props.data.title, `Título Original: ${this.props.data.original_title_romanised} \nDuração: ${this.props.data.running_time}min \nData de Lançamento: ${this.props.data.release_date} \nDiretor: ${this.props.data.director}`)
         this.setState({ nomeFilme: this.props.data.title })
 
     }
@@ -24,16 +24,15 @@ export default class Filmes extends React.Component {
                     source={{
                         uri: this.props.data.image
                     }} />
-                    <Text>{this.state.nomeFilme}</Text>
+                <Text>{this.state.nomeFilme}</Text>
                 <Text style={styles.title}>{this.props.index + 1} - {this.props.data.title}</Text>
                 <Text style={styles.subtitle}>{this.props.data.original_title}</Text>
                 <Text style={styles.description}>{this.props.data.description}</Text>
-                <Button
-                    title={"Ver detalhes"}
-                    color={"#0000FF"}
-                    onPress={this.verDetalhes.bind(this)}
-                />
-            </View>)
+
+                <Pressable style={styles.button} onPress={this.verDetalhes.bind(this)}>
+                    <Text style={styles.text}>Ver detalhes</Text>
+                </Pressable>
+            </View >)
     }
 }
 
@@ -61,6 +60,24 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        marginTop: 40
+        marginTop: 25
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'lightblue',
+        marginTop: 15,
+
+    },
+    text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
     }
 })
