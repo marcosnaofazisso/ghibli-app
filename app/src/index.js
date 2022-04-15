@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontFamily: 'sans-serif',
+        fontFamily: 'serif',
         fontSize: 30,
         fontWeight: 'bold'
     },
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     description: {
         fontFamily: 'sans-serif',
-        fontSize: 10,
+        fontSize: 15,
         marginLeft: 40,
         marginRight: 40
     },
