@@ -1,50 +1,39 @@
-import React, { useState } from "react";
-import { StatusBar, View, Text, TextInput, StyleSheet, Button, Image } from "react-native";
+import React, { useState, Component } from "react";
+import { View, Text, StyleSheet, Button, Image, FlatList } from "react-native";
+
+import api from "./services/api";
+import Filmes from "./src";
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+
     this.state = {
-      dice: 1,
-      color: true,
+      filmes: []
     }
   }
 
-  increaseDice() {
+  async componentDidMount() {
+    const response = await api.get('/films')
     this.setState({
-      dice: this.state.dice + 1
+      filmes: response.data
     })
   }
-  decreaseDice() {
-    if (this.state.dice > 1) {
-      this.setState({ dice: this.state.dice - 1 });
-    }
-  }
-
-  cliqueBotao = _ => {
-    this.setState({
-      color: !this.state.color
-    })
-
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.tiny} source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} />
-        <StatusBar
-          animated={true}
-          backgroundColor={this.state.color ? 'green' : 'blue'} />
-        <Button style={styles.churros} title={'Mudar a cor do StatusBar!'} onPress={this.cliqueBotao.bind(this)} />
-        <Text style={styles.churros}>{this.state.dice}</Text>
-        <Button color={'green'} title={'increase'} onPress={this.increaseDice.bind(this)} />
-        <Button color={'red'} title={'decrease'} onPress={this.decreaseDice.bind(this)} />
+        <FlatList
+
+          data={this.state.filmes}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item, index }) => <Filmes data={item} index={index} />}
+        />
       </View>
-
     )
-  }
 
+  }
 }
+
 
 
 
@@ -53,21 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ECF0F1'
-  },
-  churros: {
-    marginTop: 10,
-    color: 'black',
-    borderWidth: 3,
-    borderColor: 'black',
-    fontSize: 50,
-    height: 100,
-    width: 500,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }, tiny: {
-    width: 50,
-    height: 50
+    backgroundColor: '#ECF0F1',
+    margin: 10
   }
 });
