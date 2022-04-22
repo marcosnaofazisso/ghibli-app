@@ -12,7 +12,7 @@ The main goal was to create my first app using React Native framework consuming 
 The app must show all movie titles, banners, original title in japanese and descriptions. Tapping "details" button, the user should be able to see the original title romanised, duration of the movie, release date and director.  
 
 # Demo
-<img src="/demo/screen-recorded.gif" width="1200">
+<img src="/demo/screen-recorded.gif" height="800">
 
 ## Studio Ghibli API
 Official documentation be found here: https://ghibliapi.herokuapp.com/ <br>Getting started: https://ghibliapi.herokuapp.com/#section/Getting-Started
