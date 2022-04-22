@@ -5,14 +5,16 @@ export default class Filmes extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            nomeFilme: ""
+            movieTitle: ""
         }
 
     }
 
     verDetalhes = _ => {
         Alert.alert(this.props.data.title, `Título Original: ${this.props.data.original_title_romanised} \nDuração: ${this.props.data.running_time}min \nData de Lançamento: ${this.props.data.release_date} \nDiretor: ${this.props.data.director}`)
-        this.setState({ nomeFilme: this.props.data.title })
+        
+        // This is how you setState the movie title, for example...
+        this.setState({ movieTitle: this.props.data.title })
 
     }
 
@@ -24,13 +26,12 @@ export default class Filmes extends React.Component {
                     source={{
                         uri: this.props.data.image
                     }} />
-                <Text>{this.state.nomeFilme}</Text>
                 <Text style={styles.title}>{this.props.index + 1} - {this.props.data.title}</Text>
                 <Text style={styles.subtitle}>{this.props.data.original_title}</Text>
                 <Text style={styles.description}>{this.props.data.description}</Text>
 
                 <Pressable style={styles.button} onPress={this.verDetalhes.bind(this)}>
-                    <Text style={styles.text}>Ver detalhes</Text>
+                    <Text style={styles.text}>Details</Text>
                 </Pressable>
             </View >)
     }
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 200,
-        height: 200,
+        height: 250,
         marginTop: 25
     },
     button: {
